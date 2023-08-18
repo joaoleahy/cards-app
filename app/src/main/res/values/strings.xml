@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Cards</string>
+    <string name="user_name">Robert Joe</string>
+    <string name="user_email">email@example.com</string>
+    <string name="user_id">1</string>
+    <string name="user_age">30</string>
 </resources>
