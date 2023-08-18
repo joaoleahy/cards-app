@@ -28,7 +28,8 @@ class UserAdapter(private val userGroups: List<List<User>>) : RecyclerView.Adapt
         private val emailTextView: TextView = itemView.findViewById(R.id.emailTextView)
 
         fun bind(users: List<User>) {
-            for (user in users) {
+            for (i in 0 until users.size) {
+                val user = users[i]
                 nameTextView.text = user.name
                 ageTextView.text = user.age.toString()
                 emailTextView.text = user.email
