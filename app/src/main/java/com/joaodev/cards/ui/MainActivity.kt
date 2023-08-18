@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         recyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = GridLayoutManager(this, 5) // 5 columns
+        recyclerView.layoutManager = GridLayoutManager(this, 5)
 
         fetchUsers()
     }
@@ -34,7 +34,18 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val users: List<User> = response.body()?.users ?: emptyList()
 
-                    userAdapter = UserAdapter(users)
+                    val orderedUsers = mutableListOf<User>()
+
+                    for (i in 1..10) {
+                        for (j in 0 until 5) {
+                            val position = j * 10 + i - 1
+                            if (position < users.size) {
+                                orderedUsers.add(users[position])
+                            }
+                        }
+                    }
+
+                    userAdapter = UserAdapter(orderedUsers)
                     recyclerView.adapter = userAdapter
                 }
             }
