@@ -26,7 +26,7 @@ class UserAdapter(private val userGroups: List<List<User>>) : RecyclerView.Adapt
     }
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val userContainer: LinearLayout = itemView.findViewById(R.id.userContainer)
+        private val userContainer: LinearLayout = itemView.findViewById(R.id.userLinearLayout)
 
         fun bind(users: List<User>) {
             userContainer.removeAllViews()
