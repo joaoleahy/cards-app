@@ -1,5 +1,3 @@
-package com.joaodev.cards.ui
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.joaodev.cards.R
 import com.joaodev.cards.data.models.User
 
-class UserAdapter(private val users: List<User>) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+class UserAdapter(private val userGroups: List<List<User>>) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_user_card, parent, false)
@@ -16,12 +14,12 @@ class UserAdapter(private val users: List<User>) : RecyclerView.Adapter<UserAdap
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        val user = users[position]
-        holder.bind(user)
+        val usersInGroup = userGroups[position]
+        holder.bind(usersInGroup)
     }
 
     override fun getItemCount(): Int {
-        return users.size
+        return userGroups.size
     }
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -29,11 +27,12 @@ class UserAdapter(private val users: List<User>) : RecyclerView.Adapter<UserAdap
         private val ageTextView: TextView = itemView.findViewById(R.id.ageTextView)
         private val emailTextView: TextView = itemView.findViewById(R.id.emailTextView)
 
-        fun bind(user: User) {
-            nameTextView.text = user.name
-            ageTextView.text = user.age.toString()
-            emailTextView.text = user.email
+        fun bind(users: List<User>) {
+            for (user in users) {
+                nameTextView.text = user.name
+                ageTextView.text = user.age.toString()
+                emailTextView.text = user.email
+            }
         }
     }
-
 }
