@@ -4,4 +4,7 @@
     <string name="user_email">email@example.com</string>
     <string name="user_id">1</string>
     <string name="user_age">30</string>
+    <string name="id_title">Id</string>
+    <string name="email_title">Email</string>
+    <string name="age_title">Age</string>
 </resources>
