@@ -2,9 +2,10 @@ package com.joaodev.cards.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.joaodev.cards.R
+import com.joaodev.cards.data.models.User
 import com.joaodev.cards.data.services.UserResponse
 import com.joaodev.cards.data.services.clients.ApiClient
 import retrofit2.Call
@@ -21,21 +22,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         recyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.layoutManager = GridLayoutManager(this, 5) // 5 columns
 
         fetchUsers()
     }
 
     private fun fetchUsers() {
-        val call = ApiClient.apiService.getUsers()
+        val call: Call<UserResponse> = ApiClient.apiService.getUsers()
         call.enqueue(object : Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 if (response.isSuccessful) {
-                    val users = response.body()?.users ?: emptyList()
+                    val users: List<User> = response.body()?.users ?: emptyList()
 
-                    val userGroups = users.chunked(10)
-
-                    userAdapter = UserAdapter(userGroups)
+                    userAdapter = UserAdapter(users)
                     recyclerView.adapter = userAdapter
                 }
             }
