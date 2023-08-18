@@ -22,9 +22,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         recyclerView = findViewById(R.id.recyclerView)
-        userAdapter = UserAdapter(emptyList())
-        recyclerView.adapter = userAdapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         fetchUsers()
     }
@@ -35,7 +33,10 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 if (response.isSuccessful) {
                     val users = response.body()?.users ?: emptyList()
-                    userAdapter = UserAdapter(users)
+
+                    val userGroups = users.chunked(10)
+
+                    userAdapter = UserAdapter(userGroups)
                     recyclerView.adapter = userAdapter
                 }
             }
