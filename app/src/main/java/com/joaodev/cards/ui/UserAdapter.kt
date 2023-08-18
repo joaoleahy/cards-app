@@ -28,11 +28,13 @@ class UserAdapter(private val users: List<User>) : RecyclerView.Adapter<UserAdap
         private val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
         private val ageTextView: TextView = itemView.findViewById(R.id.ageTextView)
         private val emailTextView: TextView = itemView.findViewById(R.id.emailTextView)
+        private val idTextView: TextView = itemView.findViewById(R.id.idTextView)
 
         fun bind(user: User) {
             nameTextView.text = user.name
             ageTextView.text = user.age.toString()
             emailTextView.text = user.email
+            idTextView.text = user.id.toString();
         }
     }
 }
