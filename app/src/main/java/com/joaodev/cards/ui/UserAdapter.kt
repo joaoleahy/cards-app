@@ -3,6 +3,7 @@ package com.joaodev.cards.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.joaodev.cards.R
@@ -25,17 +26,27 @@ class UserAdapter(private val userGroups: List<List<User>>) : RecyclerView.Adapt
     }
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
-        private val ageTextView: TextView = itemView.findViewById(R.id.ageTextView)
-        private val emailTextView: TextView = itemView.findViewById(R.id.emailTextView)
+        private val userContainer: LinearLayout = itemView.findViewById(R.id.userContainer)
 
         fun bind(users: List<User>) {
-            for (i in 0 until users.size) {
-                val user = users[i]
+            userContainer.removeAllViews()
+
+            for (user in users) {
+                val userCard = LayoutInflater.from(itemView.context)
+                    .inflate(R.layout.item_user_card, userContainer, false)
+
+                val nameTextView: TextView = userCard.findViewById(R.id.nameTextView)
+                val ageTextView: TextView = userCard.findViewById(R.id.ageTextView)
+                val emailTextView: TextView = userCard.findViewById(R.id.emailTextView)
+
                 nameTextView.text = user.name
                 ageTextView.text = user.age.toString()
                 emailTextView.text = user.email
+
+                userContainer.addView(userCard)
             }
         }
     }
 }
+
+
