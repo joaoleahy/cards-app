@@ -37,3 +37,10 @@ A APK gerada está na pasta geral do projeto com o nome de CardsApp, para caso q
 
    ```bash
    git clone git@github.com:joaoleahy/cards-app.git
+
+
+2. Abrir no Android Studio: Abra o Android Studio e importe o projeto selecionando a pasta raiz do projeto clonado.
+
+3. Configurar Dispositivo ou Emulador: Configure um dispositivo físico ou use um emulador Android para executar o aplicativo.
+
+4. Executar o Aplicativo: Clique no botão "Executar" no Android Studio para compilar e executar o aplicativo no dispositivo ou emulador selecionado.
